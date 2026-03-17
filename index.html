@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  fetch('https://api.ipify.org?format=json')
+    .then(r => r.json())
+    .then(data => {
+      const allowed = ['197.230.122.193', '41.92.110.138'];
+      if (!allowed.includes(data.ip)) {
+        document.documentElement.innerHTML = '';
+        window.location.href = 'https://www.google.com';
+      }
+    })
+    .catch(() => {
+      document.documentElement.innerHTML = '';
+      window.location.href = 'https://www.google.com';
+    });
+</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Story ❤️</title>
