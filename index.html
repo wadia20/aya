@@ -1,31 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>html,body{display:none!important}</style>
-<script>
-  const allowed = ['197.230.122.193', '41.92.110.138', '41.137.204.14', '105.190.133.194'];
-
-  function block() {
-    document.documentElement.innerHTML = '';
-    window.location.replace('https://www.google.com');
+<style>
+  html, body { display: none !important; }
+  #gate {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #fce4ec, #f3e5f5, #e3f2fd);
+    font-family: 'Quicksand', sans-serif;
   }
+  #gate h2 {
+    font-family: 'Pacifico', cursive;
+    color: #c06080;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  #gate p { color: #b09ab5; margin-bottom: 1.5rem; font-size: 0.95rem; }
+  #gate input {
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    border: 2px solid #f48fb1;
+    outline: none;
+    font-size: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    margin-bottom: 1rem;
+    width: 260px;
+  }
+  #gate button {
+    background: linear-gradient(135deg, #f48fb1, #ce93d8);
+    color: white;
+    border: none;
+    padding: 0.8rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  #gate .error { color: #e57373; font-size: 0.85rem; margin-top: 0.5rem; display: none; }
+</style>
+<script>
+  const PASSWORD = 'ayaouadiaa0603';
 
-  function check(ip) {
-    if (allowed.includes(ip)) {
+  function unlock() {
+    if (localStorage.getItem('unlocked') === PASSWORD) {
+      document.getElementById('gate').style.display = 'none';
       document.documentElement.style.display = '';
       document.body.style.display = '';
     } else {
-      block();
+      document.getElementById('gate').style.display = 'flex';
+      document.documentElement.style.display = '';
+      document.body.style.display = '';
     }
   }
 
-  Promise.any([
-    fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => d.ip),
-    fetch('https://api64.ipify.org?format=json').then(r => r.json()).then(d => d.ip),
-    fetch('https://ipapi.co/json/').then(r => r.json()).then(d => d.ip)
-  ])
-  .then(ip => check(ip))
-  .catch(block);
+  function tryPassword() {
+    const val = document.getElementById('pwd').value;
+    if (val === PASSWORD) {
+      localStorage.setItem('unlocked', PASSWORD);
+      document.getElementById('gate').style.display = 'none';
+    } else {
+      document.getElementById('err').style.display = 'block';
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', unlock);
 </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -441,6 +484,14 @@
   </style>
 </head>
 <body>
+
+<div id="gate">
+  <h2>🌸 Our Story</h2>
+  <p>Enter the secret code to continue 💕</p>
+  <input id="pwd" type="password" placeholder="mot de passe..." onkeydown="if(event.key==='Enter')tryPassword()" />
+  <button onclick="tryPassword()">Entrer ❤️</button>
+  <span class="error" id="err">Mot de passe incorrect 🙈</span>
+</div>
 
 <canvas id="particles-canvas"></canvas>
 
