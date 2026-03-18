@@ -19,9 +19,10 @@
     }
   }
 
-  Promise.race([
+  Promise.any([
     fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => d.ip),
-    fetch('https://api64.ipify.org?format=json').then(r => r.json()).then(d => d.ip)
+    fetch('https://api64.ipify.org?format=json').then(r => r.json()).then(d => d.ip),
+    fetch('https://ipapi.co/json/').then(r => r.json()).then(d => d.ip)
   ])
   .then(ip => check(ip))
   .catch(block);
