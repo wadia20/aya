@@ -445,13 +445,51 @@
     }
 
     /* ─── RESPONSIVE ─── */
-    @media (max-width: 680px) {
-      .tl-spine { display:none; }
+    @media (max-width: 768px) {
+
+      /* Hero */
+      .hero-title { font-size: 2.8rem; }
+      .hero-sub { font-size: 1rem; padding: 0 1.5rem; }
+      .blob1, .blob2, .blob3 { width: 200px; height: 200px; }
+
+      /* Intro */
+      #intro { padding: 3rem 1.2rem; }
+      .intro-box { padding: 2rem 1.5rem; }
+      .intro-box p { font-size: 1rem; }
+
+      /* Timeline */
+      #timeline { padding: 2rem 1rem 4rem; }
+      .tl-spine { display: none; }
       .tl-item,
-      .tl-item:nth-child(even) { flex-direction: column; align-items: center; }
-      .tl-dot { display:none; }
-      .tl-photo { width: 100%; }
-      .tl-text  { width: 100%; padding: 1rem 0 0 !important; text-align: center !important; }
+      .tl-item:nth-child(even) {
+        flex-direction: column;
+        align-items: center;
+        transform: translateY(30px);
+      }
+      .tl-item.show { transform: translateY(0); }
+      .tl-dot { display: none; }
+      .tl-photo {
+        width: 100%;
+        border-radius: 16px;
+        aspect-ratio: 4/3;
+      }
+      .tl-text {
+        width: 100%;
+        padding: 1rem 0.5rem 0 !important;
+        text-align: center !important;
+      }
+      .tl-title { font-size: 1.2rem; }
+      .tl-desc { font-size: 0.9rem; }
+      .tl-item { margin-bottom: 2.5rem; }
+
+      /* Ending */
+      #ending { padding: 4rem 1.5rem 5rem; }
+      .end-title { font-size: 1.6rem; }
+      .end-note { font-size: 0.95rem; }
+      .end-btn { font-size: 1rem; padding: 0.85rem 2rem; }
+
+      /* Gate (password screen) */
+      #gate input { width: 85vw; }
     }
 
   </style>
