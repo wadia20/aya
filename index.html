@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style>body{visibility:hidden}</style>
 <script>
+  const allowed = ['197.230.122.193', '41.92.110.138', '41.137.204.14'];
+
+  function block() {
+    document.documentElement.innerHTML = '';
+    window.location.replace('https://www.google.com');
+  }
+
+  function check(ip) {
+    if (allowed.includes(ip)) {
+      document.body.style.visibility = 'visible';
+    } else {
+      block();
+    }
+  }
+
   fetch('https://api.ipify.org?format=json')
     .then(r => r.json())
-    .then(data => {
-      const allowed = ['197.230.122.193', '41.92.110.138'];
-      if (!allowed.includes(data.ip)) {
-        document.documentElement.innerHTML = '';
-        window.location.href = 'https://www.google.com';
-      }
-    })
-    .catch(() => {
-      document.documentElement.innerHTML = '';
-      window.location.href = 'https://www.google.com';
-    });
+    .then(d => check(d.ip))
+    .catch(() =>
+      fetch('https://api64.ipify.org?format=json')
+        .then(r => r.json())
+        .then(d => check(d.ip))
+        .catch(block)
+    );
 </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
