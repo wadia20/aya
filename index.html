@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <style>
-  html, body { display: none !important; }
+  #content { display: none; }
   #gate {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -46,29 +46,23 @@
 <script>
   const PASSWORD = 'ayaouadiaa0603';
 
-  function unlock() {
-    if (localStorage.getItem('unlocked') === PASSWORD) {
-      document.getElementById('gate').style.display = 'none';
-      document.documentElement.style.display = '';
-      document.body.style.display = '';
-    } else {
-      document.getElementById('gate').style.display = 'flex';
-      document.documentElement.style.display = '';
-      document.body.style.display = '';
-    }
-  }
-
   function tryPassword() {
     const val = document.getElementById('pwd').value;
     if (val === PASSWORD) {
       localStorage.setItem('unlocked', PASSWORD);
       document.getElementById('gate').style.display = 'none';
+      document.getElementById('content').style.display = '';
     } else {
       document.getElementById('err').style.display = 'block';
     }
   }
 
-  window.addEventListener('DOMContentLoaded', unlock);
+  window.addEventListener('DOMContentLoaded', function() {
+    if (localStorage.getItem('unlocked') === PASSWORD) {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('content').style.display = '';
+    }
+  });
 </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -493,6 +487,7 @@
   <span class="error" id="err">Mot de passe incorrect 🙈</span>
 </div>
 
+<div id="content">
 <canvas id="particles-canvas"></canvas>
 
 
@@ -828,5 +823,6 @@ document.querySelector('.hero-btn').addEventListener('click', e => {
 });
 </script>
 
+</div><!-- end #content -->
 </body>
 </html>
