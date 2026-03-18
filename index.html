@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <style>
-  #content { display: none; }
   #gate {
     display: flex;
     flex-direction: column;
@@ -42,28 +41,8 @@
     cursor: pointer;
   }
   #gate .error { color: #e57373; font-size: 0.85rem; margin-top: 0.5rem; display: none; }
+  #content { display: none; }
 </style>
-<script>
-  const PASSWORD = 'ayaouadiaa0603';
-
-  function tryPassword() {
-    const val = document.getElementById('pwd').value;
-    if (val === PASSWORD) {
-      localStorage.setItem('unlocked', PASSWORD);
-      document.getElementById('gate').style.display = 'none';
-      document.getElementById('content').style.display = '';
-    } else {
-      document.getElementById('err').style.display = 'block';
-    }
-  }
-
-  window.addEventListener('DOMContentLoaded', function() {
-    if (localStorage.getItem('unlocked') === PASSWORD) {
-      document.getElementById('gate').style.display = 'none';
-      document.getElementById('content').style.display = '';
-    }
-  });
-</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Story ❤️</title>
@@ -824,5 +803,28 @@ document.querySelector('.hero-btn').addEventListener('click', e => {
 </script>
 
 </div><!-- end #content -->
+
+<script>
+  var PASSWORD = 'ayaouadiaa0603';
+
+  function tryPassword() {
+    var val = document.getElementById('pwd').value;
+    if (val === PASSWORD) {
+      try { localStorage.setItem('unlocked', PASSWORD); } catch(e) {}
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+    } else {
+      document.getElementById('err').style.display = 'block';
+    }
+  }
+
+  try {
+    if (localStorage.getItem('unlocked') === PASSWORD) {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+    }
+  } catch(e) {}
+</script>
+
 </body>
 </html>
